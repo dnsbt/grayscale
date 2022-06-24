@@ -10,8 +10,6 @@ class AdminNav extends Model
 
     public static function getNav(): array
     {
-        return [
-            []
-            ];
+        return [];
     }
 }
