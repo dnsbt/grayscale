@@ -16,8 +16,8 @@ class LoginController extends AdminPageController
 
     public function login(Request $request): RedirectResponse
     {
-        $request->validate(['login' => 'required|string', 'password' => 'required|string']);
-        $credentials = $request->only('login', 'password');
+        $request->validate(['name' => 'required|string', 'password' => 'required|string']);
+        $credentials = $request->only('name', 'password');
 
         if (Auth::attempt($credentials)) {
             return redirect()->route(AdminNav::ADMIN_DASHBOARD);
