@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Models\AdminNav;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +20,8 @@ Route::prefix('/admin')->group(function () {
     Route::middleware(['guest'])->group(function () {
         Route::get('/login', [LoginController::class, 'index'])->name('admin_login');
         Route::post('/login', [LoginController::class, 'login'])->name('admin_login');
+    });
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name(AdminNav::ADMIN_DASHBOARD);
     });
 });
