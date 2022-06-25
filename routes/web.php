@@ -18,10 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/admin')->group(function () {
 
     Route::middleware(['guest'])->group(function () {
-        Route::get('/login', [LoginController::class, 'index'])->name('admin_login');
-        Route::post('/login', [LoginController::class, 'login'])->name('admin_login');
+        Route::get('/login', [LoginController::class, 'index'])->name(AdminNav::ADMIN_LOGIN);
+        Route::post('/login', [LoginController::class, 'login'])->name(AdminNav::ADMIN_LOGIN);
     });
     Route::middleware(['auth'])->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name(AdminNav::ADMIN_DASHBOARD);
+
+        Route::resource('site_config', 'Admin\SiteConfigurationController')->except('show');
+        Route::resource('files', 'Admin\FileController')->except('show', 'update');
+        Route::resource('projects', 'Admin\ProjectController')->except('show');
     });
 });
